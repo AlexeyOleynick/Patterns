@@ -1,54 +1,59 @@
-package subject
-{
+package subject {
 	import observer.IObserver;
-	
-	public class WeatherProvider implements ISubject
-	{
-		
+
+	/**
+	 *
+	 * Subject, that will send notifications
+	 */
+	public class WeatherProvider implements ISubject {
+
 		public var weatherVO:WeatherVO;
-		public var observers:Array;
-		
-		public function WeatherProvider()
-		{
+
+		private var observers:Array;
+
+		public function WeatherProvider() {
 			weatherVO = new WeatherVO;
 			observers = new Array;
 		}
-		
-		public function registerObserver(observer:IObserver):void
-		{
-			if(!hasObserver(observer))
+
+		public function registerObserver(observer:IObserver):void {
+			//If observer is not already added
+			if(!hasObserver(observer)) {
 				observers.push(observer);
+			}
 		}
-		
-		public function hasObserver(observerToFind:IObserver):Boolean{
-			for each(var currentObserver:IObserver in observers){
-				if(currentObserver == observerToFind)
+
+		public function hasObserver(observerToFind:IObserver):Boolean {
+			for each(var currentObserver:IObserver in observers) {
+				if(currentObserver == observerToFind) {
 					return true;
+				}
 			}
 			return false;
 		}
-		
-		public function removeObserver(observer:IObserver):void
-		{
-			for(var observerIndex:int = 0; observerIndex<observers.length; observerIndex++){
-				if(observers[observerIndex] == observer){
+
+		public function removeObserver(observer:IObserver):void {
+			for(var observerIndex:int = 0; observerIndex < observers.length; observerIndex++) {
+				if(observers[observerIndex] == observer) {
 					observers.splice(observerIndex, 1);
 				}
 			}
 		}
-		
-		public function notifyObservers():void
-		{
-			for each(var currentObserver:IObserver in observers){
+
+		public function notifyObservers():void {
+			for each(var currentObserver:IObserver in observers) {
 				currentObserver.update(weatherVO);
 			}
 		}
-		
-		public function setWeatherData(temperature:Number, humidity:Number, pressure:Number):void{
+
+		/**
+		 * Update info and notify every observer
+		 */
+		public function setWeatherData(temperature:Number, humidity:Number, pressure:Number):void {
 			weatherVO.temperature = temperature;
 			weatherVO.humidity = humidity;
 			weatherVO.pressure = pressure;
-			
+
 			notifyObservers();
 		}
 	}

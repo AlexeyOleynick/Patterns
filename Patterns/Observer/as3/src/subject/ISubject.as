@@ -1,14 +1,23 @@
-package subject
-{
+package subject {
 	import observer.IObserver;
 
-	public interface ISubject
-	{
-		
-		
+	/**
+	 *
+	 * Interface for Observable element
+	 */
+	public interface ISubject {
+		/**
+		 * Add observer to list
+		 */
 		function registerObserver(observer:IObserver):void;
+		/**
+		 * Remove observer to list
+		 */
 		function removeObserver(observer:IObserver):void;
+		/**
+		 * Notify all observers in list
+		 */
 		function notifyObservers():void;
-		function hasObserver(observer:IObserver):Boolean;
+
 	}
 }

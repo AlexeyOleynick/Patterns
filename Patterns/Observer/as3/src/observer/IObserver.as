@@ -1,9 +1,14 @@
-package observer
-{
+package observer {
 	import subject.WeatherVO;
 
-	public interface IObserver
-	{
+	/**
+	 *
+	 * Observer interface
+	 */
+	public interface IObserver {
+		/**
+		 * This method will executed when subjuct will notify all observervers
+		 */
 		function update(weatherData:WeatherVO):void;
 	}
 }

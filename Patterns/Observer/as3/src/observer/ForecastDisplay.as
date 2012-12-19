@@ -1,18 +1,19 @@
-package observer
-{
+package observer {
 	import subject.WeatherProvider;
 	import subject.WeatherVO;
-	
-	public class ForecastDisplay implements IObserver
-	{
+
+	public class ForecastDisplay implements IObserver {
 		private var forecasts:Vector.<String>;
-		
-		public function ForecastDisplay(weatherData:WeatherProvider)
-		{
+
+		/**
+		 *
+		 * Concrete observer element
+		 */
+		public function ForecastDisplay(weatherData:WeatherProvider) {
 			weatherData.registerObserver(this);
-			
+
 			forecasts = new Vector.<String>;
-			
+
 			forecasts.push('Mostly falling');
 			forecasts.push('Freeze-thaw conditions');
 			forecasts.push('Winds decreasing');
@@ -21,15 +22,13 @@ package observer
 			forecasts.push('Mostly dry');
 			forecasts.push('Dusting of snow');
 		}
-		
-		public function display():void
-		{
-			var randomForecast:int = Math.floor(Math.random()*forecasts.length);	
+
+		public function display():void {
+			var randomForecast:int = Math.floor(Math.random() * forecasts.length);
 			trace('Weather Forecast: ' + forecasts[randomForecast]);
 		}
-		
-		public function update(weatherData:WeatherVO):void
-		{
+
+		public function update(weatherData:WeatherVO):void {
 			display();
 		}
 	}
