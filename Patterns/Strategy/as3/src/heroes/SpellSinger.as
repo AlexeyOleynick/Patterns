@@ -1,11 +1,12 @@
-package heroes
-{
+package heroes {
 	import weapons.HydroblastMagicBehavior;
 
-	public class SpellSinger extends Hero
-	{
-		public function SpellSinger()
-		{
+	/**
+	 *
+	 * Concrete hero class
+	 */
+	public class SpellSinger extends Hero {
+		public function SpellSinger() {
 			name = 'Spell Singer';
 			this.currentWeapon = new HydroblastMagicBehavior;
 		}
